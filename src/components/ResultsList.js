@@ -15,10 +15,10 @@ const ResultList = ({ title, results }) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={results}
-            keyExtractor={(result) => result.publishedAt}
-            renderItem={({item}) => {
-                return <ResultsDetail result = {item}/>
-             }} />
+            keyExtractor={(result) => result.publishedAt + Math.floor(Math.random() * 100) + 1}
+            renderItem={({ item }) => {
+                return <ResultsDetail result={item} />
+            }} />
     </View>
     );
 }
@@ -26,10 +26,10 @@ const ResultList = ({ title, results }) => {
 const styles = StyleSheet.create({
 
     titleStyle: {
-        marginLeft : 15,
+        marginLeft: 15,
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom : 5,
+        marginBottom: 5,
 
     },
 });

@@ -1,21 +1,29 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { withNavigation } from "react-navigation";
 
-const ResultsDetail = ({ result }) => {
+const ResultsDetail = ({ result, navigation }) => {
     return (
         <View style={styles.container}>
 
-            <Image style={styles.imageStyle}
-                source={{ uri: result.urlToImage }}>
-            </Image>
 
-            <Text
-                style={styles.sourceStyle}>{result.source.name}
-            </Text>
+            <TouchableOpacity
+                onPress={() => { navigation.navigate('ShowResultDetail' ,{
+                      url : result.urlToImage ,
+                      content : result.content
+                }) }}>
+                <Image style={styles.imageStyle}
+                    source={{ uri: result.urlToImage }}>
+                </Image>
 
-            <Text
-                style={styles.headingStyle}>{result.title}
-            </Text>
+                <Text
+                    style={styles.sourceStyle}>{result.source.name}
+                </Text>
+
+                <Text
+                    style={styles.headingStyle}>{result.title}
+                </Text>
+            </TouchableOpacity>
 
 
         </View>
@@ -23,16 +31,16 @@ const ResultsDetail = ({ result }) => {
 }
 
 const styles = StyleSheet.create({
-    
+
     container: {
         marginLeft: 15,
     },
-    
+
     imageStyle: {
         width: 250,
         height: 120,
         borderRadius: 5,
-        marginBottom : 5,
+        marginBottom: 5,
     },
 
     sourceStyle: {
@@ -47,4 +55,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ResultsDetail;
+export default withNavigation(ResultsDetail);

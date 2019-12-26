@@ -4,7 +4,9 @@ import yelp from "../api/yelp";
 
 export default () => {
 
-    const [results, setResults] = useState([]);
+    const [resultsEntertainment, setResultsEntertainment] = useState([]);
+    const [resultsSports, setResultsSports] = useState([]);
+    const [resultsBuisness, setResultsBuisness] = useState([]);
 
     const [errorMsg, setErrorMessage] = useState('');
 
@@ -15,11 +17,17 @@ export default () => {
                 params: {
                     country: searchTerm,
                     category: searchCategory,
-                    apiKey: '568ab9ae01ce48b496e1d8bd57bf38e7',
+                    apiKey: 'YOUR_API_KEY',
                 }
             });
 
-            setResults(resp.data.articles)
+            if (searchCategory === 'entertainment') {
+                setResultsEntertainment(resp.data.articles)
+            } else if (searchCategory === 'sports') {
+                setResultsSports(resp.data.articles)
+            } else if (searchCategory === 'business') {
+                setResultsBuisness(resp.data.articles)
+            }
 
         } catch (err) {
             setErrorMessage(err)
@@ -27,10 +35,10 @@ export default () => {
     }
 
     useEffect(() => {
-        searchApi("in" , "")
+        searchApi("in", "")
     }, []);
 
-    return [searchApi, results, errorMsg]
+    return [searchApi, resultsEntertainment,resultsSports,resultsBuisness, errorMsg]
 
 };
 
